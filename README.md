@@ -1,0 +1,1 @@
+# Paralelismo-em-Web-Scrapping
