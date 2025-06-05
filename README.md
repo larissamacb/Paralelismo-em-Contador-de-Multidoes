@@ -16,8 +16,8 @@ Download Link:  [YOLOv5m-crowd-human](https://drive.google.com/file/d/1gglIwqxaH
 
 ## Test
 
-```bash
-$ python detect.py --weights crowdhuman_yolov5m.pt --source _test/ --view-img
+```bashpython detect.py --weights crowdhuman_yolov5m.pt --source _test/ --view-img
+$ 
 
 ```
   
