@@ -19,8 +19,68 @@ RAM: 16GB
 <h2>Solução</h2>
 <p>A princípio, testamos a detecção da quantidade de pessoas por meio de um modelo com a finalidade de reconhecer pessoas. Percebemos, então, que em imagens com multidões, como em protestos (que foi o exemplo utilizado), geralmente não há visibilidade de parte suficiente do corpo para que ocorra a identificação. Isso levou ao uso de reconhecimento de cabeças como alternativa, que gerou melhores resultados, embora aquelas que estivessem a uma distância maior da imagem não fossem detectadas. Isso traz a necessidade de um modelo treinado mais especificamente para reconhecer cabeças no contexto de imagens aéreas, nas quais há muito menos características do objeto de detecção que facilitem o reconhecimento, mas não houve um aprofundamento nessa parte pela falta de um fácil acesso a esse modelo específico e porque não é esse o objetivo principal do projeto.</p>
 <p>Tendo sido feita uma aproximação satisfatória dos resultados esperados com o teste da imagem representada na figura abaixo, a multiplicamos até o total de 988 imagens idênticas e utilizamos o módulo multiprocessing do Python para dividi-las em chunks, que seriam processados paralelamente pelos núcleos nas quantidades 1, 2, 4, 6, 8, 12 e 16. Testamos cada uma delas e anotamos os resultados de tempo decorrido de processamento para cada caso, assim como calculamos o speedup e a eficiência para fins de comparação. Cada processo foi responsável por carregar e processar um subconjunto das imagens, executando o modelo YOLOv5 para realizar a detecção de cabeças.</p>
+<img src=multidao.png>
 <hr>
 <h2>Resultados</h2>
-<img src=>
+<p>Com o conjunto de 988 imagens replicadas, foram realizados testes variando a quantidade de processos utilizados para a execução paralela da contagem. A tabela abaixo apresenta os tempos de execução, speedup e eficiência para cada configuração testada:</p>
+<br>
+<table border="1" cellspacing="0" cellpadding="5">
+  <thead>
+    <tr>
+      <th>Nº de Processos</th>
+      <th>Tempo (s)</th>
+      <th>SpeedUp</th>
+      <th>Eficiência (%)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>219</td>
+      <td>1,00</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>156</td>
+      <td>1,40</td>
+      <td>70</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>138</td>
+      <td>1,59</td>
+      <td>40</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>106</td>
+      <td>2,06</td>
+      <td>34</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>114</td>
+      <td>1,92</td>
+      <td>24</td>
+    </tr>
+    <tr>
+      <td>12</td>
+      <td>129</td>
+      <td>1,70</td>
+      <td>14</td>
+    </tr>
+    <tr>
+      <td>16</td>
+      <td>142</td>
+      <td>1,54</td>
+      <td>10</td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<p>Para melhor visualização dos resultados, esses números podem ser representados em gráficos:</p>
+<img src=grafico.png>
+
 
 Conclusão
