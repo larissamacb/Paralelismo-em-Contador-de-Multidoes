@@ -1,4 +1,5 @@
 <h1>Relatório: Contagem Paralelizada de Pessoas em Imagens com YOLOv5</h1>
+Trabalho por Larissa Batista Maciel (@larissamacb) e Samuel Gonçalves de Araujo (@SamuelGdA).
 <hr>
 <h2>Introdução</h2>
 <p>Este projeto consiste em um experimento prático de processamento de imagens e paralelismo aplicado à contagem automática de pessoas. A partir de uma única imagem contendo diversas pessoas, utilizamos a técnica de reconhecimento de cabeças com o modelo YOLOv5 para identificar e contar quantas pessoas estão presentes.</p>
@@ -80,7 +81,22 @@ RAM: 16GB
 </table>
 <br>
 <p>Para melhor visualização dos resultados, esses números podem ser representados em gráficos:</p>
-<img src=grafico.png>
+<img src=graficos.png>
+<br>
+<p>No primeiro gráfico, o melhor desempenho é representado pelo ponto mais baixo, indicando o menor tempo em que se obtiveram todos os resultados das análises. Diretamente relacionado com o tempo está o speedup, cujo gráfico (segunda imagem) apresenta-se muito semelhante ao que seria o de tempo se estivesse invertido verticalmente. Isso acontece porque ele verifica quão mais rápido foi o processamento em comparação com o caso sequencial. Já a eficiência (terceira imagem) indica quanto do desempenho teórico máximo foi obtido. Esse último foi caracterizado por uma grande queda seguida de outras menores.</p>
+<p>Observa-se que o melhor desempenho foi obtido com 6 processos, atingindo um speedup de 2,06, com tempo de execução reduzido em mais de 50% em comparação com a execução sequencial. Porém, a partir de 8 processos, os tempos passam a aumentar progressivamente, indicando perda de desempenho.</p>
+<p>As possíveis causas para esse comportamento são relacionados à eficiência e incluem:</p>
 
+<ul>
+  <li><strong>Sobrecarga de gerenciamento de processos:</strong> À medida que mais processos são criados, o sistema precisa dedicar mais tempo para coordená-los, o que pode consumir parte do ganho obtido com a paralelização.</li>
+  <li><strong>Concorrência de acesso ao disco:</strong> O uso simultâneo de múltiplos processos para carregar imagens pode gerar gargalos no subsistema de I/O.</li>
+  <li><strong>Custo de comunicação e sincronização:</strong> O tempo gasto na coordenação entre os processos, especialmente para unir os resultados, pode superar os benefícios da execução paralela quando muitos processos são utilizados.</li>
+</ul>
 
-Conclusão
+<p>Além dessas causas, é importante considerar a arquitetura da CPU utilizada nos testes. O processador Intel Core i7-12700 possui 12 núcleos físicos (8 de alta performance e 4 de alta eficiência), totalizando 20 threads com Hyper-Threading. O pico de performance ocorreu com 6 processos (speedup de 2,06), mesmo havendo núcleos disponíveis, o que indica que adicionar mais processos não trouxe benefícios — ao contrário, causou queda na eficiência. Isso pode estar relacionado ao uso dos núcleos de eficiência, que são menos potentes, além da contenção de recursos como cache e memória. Também é relevante notar que o Hyper-Threading não apresentou ganhos expressivos nesse tipo de carga computacional intensiva, como a execução do YOLOv5, que tende a se beneficiar mais de núcleos físicos do que de threads lógicas.</p>
+<hr>
+<h2>Conclusão</h2>
+<p>A paralelização do processamento de imagens com o modelo YOLOv5 demonstrou ganhos significativos de desempenho até um certo ponto. O uso de 6 processos apresentou o melhor equilíbrio entre tempo de execução e eficiência computacional, atingindo uma redução expressiva no tempo total necessário para a contagem.</p>
+<p>Por outro lado, o experimento evidenciou as limitações da paralelização excessiva, uma vez que o uso de mais processos não resultou em melhores tempos. Pelo contrário, a partir de 8 processos houve degradação do desempenho, causada principalmente pela sobrecarga de gerenciamento, disputa por recursos e limitações do hardware.</p>
+<p>Com isso, conclui-se que, para aplicações semelhantes de processamento intensivo com grande volume de dados, a análise prévia da capacidade da máquina e testes empíricos são fundamentais para definir o ponto ótimo de paralelização. O projeto demonstra com clareza a importância do balanceamento entre recursos computacionais e desempenho na aplicação de técnicas de paralelismo em tarefas do mundo real.</p>
+
