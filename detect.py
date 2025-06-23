@@ -4,32 +4,6 @@ import shutil
 import time
 from multiprocessing import Process
 from pathlib import Path
-<<<<<<< HEAD
-
-
-def run_detect_on_dir(weights, source, classes, additional_args):
-    command = f"python detect_single.py --weights {weights} --source {source} --classes {' '.join(map(str, classes))} {additional_args}"
-    os.system(command)
-
-def split_images(source_folder, num_parts):
-    image_paths = list(Path(source_folder).glob("*.png"))
-    total_images = len(image_paths)
-    
-    if total_images == 0:
-        raise ValueError(f"Nenhuma imagem encontrada em {source_folder}")
-    
-    # Evita num_parts > total_images para não gerar chunk_size = 0
-    num_parts = min(num_parts, total_images)
-    
-    # Calcula chunk_size, agora sempre >= 1
-    chunk_size = (total_images + num_parts - 1) // num_parts
-    
-    chunks = [image_paths[i:i + chunk_size] for i in range(0, total_images, chunk_size)]
-    return chunks
-
-
-
-=======
 import sys
 
 def run_detect_on_dir(weights, source, classes, additional_args):
@@ -49,7 +23,6 @@ def split_images(source_folder, num_parts):
     chunks = [image_paths[i:i + chunk_size] for i in range(0, total_images, chunk_size)]
     return chunks
 
->>>>>>> 087b9e5 (Versão final)
 def prepare_dirs(chunks, base_temp_dir):
     temp_dirs = []
     for i, chunk in enumerate(chunks):
@@ -85,18 +58,6 @@ def main():
     weights = opt.weights
     classes = opt.classes
 
-<<<<<<< HEAD
-    additional_args = []
-    for k, v in vars(opt).items():
-        if k not in ['weights', 'source', 'classes'] and v:
-            if isinstance(v, bool):
-                additional_args.append(f"--{k}")
-            else:
-                additional_args.append(f"--{k} {v}")
-    additional_args = ' '.join(additional_args)
-
-    for num_proc in [1]:
-=======
 
     valid_args = ['img-size', 'conf-thres', 'iou-thres', 'device', 'view-img', 'save-txt', 'save-conf', 'augment', 'agnostic-nms']
     additional_args = []
@@ -114,7 +75,6 @@ def main():
 
 
     for num_proc in [10]:
->>>>>>> 087b9e5 (Versão final)
         print(f"\nRunning with {num_proc} parallel processes...")
         chunks = split_images(source, num_proc)
         base_temp_dir = Path("yolo_parallel_temp")
@@ -136,8 +96,4 @@ def main():
 
 
 if __name__ == '__main__':
-<<<<<<< HEAD
     main()
-=======
-    main()
->>>>>>> 087b9e5 (Versão final)
