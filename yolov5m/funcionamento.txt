@@ -1,0 +1,8 @@
+garantir que o yolov5m/crowdhuman_yolov5m.pt está na pasta LINK DOWNLOAD: https://drive.google.com/file/d/1gglIwqxaH2iTvy6lZlXuAcMpd_U0GCUb/view
+ter imagens na pasta yolov5m/img_set
+cd yolov5m
+pip install -r requirements.txt
+
+python3 detect.py --weights crowdhuman_yolov5m.pt --source img_set/ --classes 1
+OU
+py -3.11 detect.py --weights crowdhuman_yolov5m.pt --source img_set/ --classes 1
