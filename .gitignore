@@ -19,13 +19,19 @@
 *.avi
 *.data
 *.json
+<<<<<<< HEAD
 
 *.cfg
+=======
+*.cfg
+!setup.cfg
+>>>>>>> 087b9e5 (Versão final)
 !cfg/yolov3*.cfg
 
 storage.googleapis.com
 runs/*
 data/*
+<<<<<<< HEAD
 !data/images/zidane.jpg
 !data/images/bus.jpg
 !data/coco.names
@@ -39,6 +45,18 @@ data/*
 pycocotools/*
 results*.txt
 gcp_test*.sh
+=======
+data/images/*
+!data/*.yaml
+!data/hyps
+!data/scripts
+!data/images
+!data/images/zidane.jpg
+!data/images/bus.jpg
+!data/*.sh
+
+results*.csv
+>>>>>>> 087b9e5 (Versão final)
 
 # Datasets -------------------------------------------------------------------------------------------------------------
 coco/
@@ -53,9 +71,24 @@ VOC/
 # Neural Network weights -----------------------------------------------------------------------------------------------
 *.weights
 *.pt
+<<<<<<< HEAD
 *.onnx
 *.mlmodel
 *.torchscript
+=======
+*.pb
+*.onnx
+*.engine
+*.mlmodel
+*.mlpackage
+*.torchscript
+*.tflite
+*.h5
+*_saved_model/
+*_web_model/
+*_openvino_model/
+*_paddle_model/
+>>>>>>> 087b9e5 (Versão final)
 darknet53.conv.74
 yolov3-tiny.conv.15
 
@@ -84,7 +117,11 @@ sdist/
 var/
 wheels/
 *.egg-info/
+<<<<<<< HEAD
 wandb/
+=======
+/wandb/
+>>>>>>> 087b9e5 (Versão final)
 .installed.cfg
 *.egg
 
