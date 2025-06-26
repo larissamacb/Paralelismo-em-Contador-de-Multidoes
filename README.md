@@ -1,5 +1,6 @@
 <h1>Relatório: Contagem Paralelizada de Pessoas em Imagens com YOLOv5</h1>
 Trabalho por Larissa Batista Maciel (@larissamacb) e Samuel Gonçalves de Araujo (@SamuelGdA).
+<a href="https://github.com/SamuelGdA/Paralelismo-Contador-de-Multidoes/tree/main">Repositório com código funcionando</a>
 <hr>
 <h2>Introdução</h2>
 <p>Este projeto consiste em um experimento prático de processamento de imagens e paralelismo aplicado à contagem automática de pessoas. A partir de uma única imagem contendo diversas pessoas, utilizamos a técnica de reconhecimento de cabeças com o modelo YOLOv5 para identificar e contar quantas pessoas estão presentes.</p>
