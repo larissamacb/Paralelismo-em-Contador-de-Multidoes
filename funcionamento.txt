@@ -1,5 +1,44 @@
-garantir que o yolov5m/crowdhuman_yolov5m.pt está na pasta LINK DOWNLOAD: https://drive.google.com/file/d/1gglIwqxaH2iTvy6lZlXuAcMpd_U0GCUb/view
-ter imagens na pasta yolov5m/img_set
+Garantir que o yolov5m/crowdhuman_yolov5m.pt está na pasta LINK DOWNLOAD: https://drive.google.com/file/d/1gglIwqxaH2iTvy6lZlXuAcMpd_U0GCUb/view
+Ter imagens na pasta yolov5m/img_set
+Código para fazer cópias de imagens(GIT BASH):
+
+#!/bin/bash
+
+# Caminho da imagem original
+IMAGEM_ORIGINAL="multidao.png"
+
+# Pasta de destino
+PASTA_DESTINO="yolov5m/img_set"
+
+# Número de cópias que deseja criar
+NUM_COPIAS=988
+
+# Verifica se a imagem existe
+if [ ! -f "$IMAGEM_ORIGINAL" ]; then
+  echo "❌ A imagem original não foi encontrada: $IMAGEM_ORIGINAL"
+  exit 1
+fi
+
+# Cria a pasta de destino se não existir
+if [ ! -d "$PASTA_DESTINO" ]; then
+  mkdir -p "$PASTA_DESTINO"
+  echo "📁 Pasta de destino criada: $PASTA_DESTINO"
+fi
+
+# Obtém a extensão do arquivo original
+EXTENSAO="${IMAGEM_ORIGINAL##*.}"
+
+# Faz as cópias com nomes no formato image_0001.png, image_0002.png, etc.
+for ((i=1; i<=NUM_COPIAS; i++)); do
+  NOME_FORMATADO=$(printf "image_%04d.%s" "$i" "$EXTENSAO")
+  cp "$IMAGEM_ORIGINAL" "$PASTA_DESTINO/$NOME_FORMATADO"
+  echo "✅ Copiado: $NOME_FORMATADO"
+done
+
+echo "✅ Todas as $NUM_COPIAS cópias foram feitas para $PASTA_DESTINO"
+
+
+Para executar a detecção faça isso no terminal:
 cd yolov5m
 pip install -r requirements.txt
 
