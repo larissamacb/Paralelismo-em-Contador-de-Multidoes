@@ -1,4 +1,0 @@
-garantir que o yolov5/crowdhuman_yolov5m.pt está na pasta
-cd yolov5
-
-python3 detect.py --weights crowdhuman_yolov5m.pt --source img_set/ --classes 1
